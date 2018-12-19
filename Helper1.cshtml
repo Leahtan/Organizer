@@ -1,0 +1,24 @@
+﻿@helper HelperName(string name) {
+    // your helper can contain code and/or markup, e.g.
+    // var msg = "Hello " + name;
+    // <p>@msg</p>
+    // For more information, visit http://go.microsoft.com/fwlink/?LinkID=204658
+}
+<div class="bill_info" id="@bill.co_name + "_info">
+
+    <div class="org_tbl" style="width:100%;">
+        <div class="org_rw">
+            <div class="org_cl">
+                <p class="det_co_name im_a_link">
+                   <input type="hidden" id="@bill.co_name + "_link" value="@bill.url + " />
+                </p>
+                <p>@bill.notes</p>
+            </div>
+            <div class="org_cl det_amt_due">
+                <p>@bill_amt_due</p>
+                <p>@bill_due_date</p>
+            </div>
+        </div>
+    </div>
+
+</div>
