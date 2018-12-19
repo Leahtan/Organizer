@@ -1,0 +1,20 @@
+﻿ <!--New Code 2018-->
+
+
+@{
+    basicFunctions BFunc = new basicFunctions();
+    BFunc.displayBills();
+
+    OrganizerEntities org_DB = new OrganizerEntities();
+
+
+
+    var query = from it in org_DB.bills
+                orderby it.date_due
+                select it;
+}
+@foreach (bill bill in query)
+{
+                        <!--<div>@bill.co_name</div>-->
+    @Html.Raw(BFunc.draw_bill_flags(bill.co_name, (DateTime)bill.date_due, (decimal)bill.amount_due))
+}

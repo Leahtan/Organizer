@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+@{ 
+
+    basicFunctions BFunc = new basicFunctions();
+    BFunc.displayBills();
+
+    OrganizerEntities org_DB = new OrganizerEntities();
+}
+<html>
+
+    <head>
+        <title>Organizer</title>
+
+        <link rel="stylesheet" href="~/css/org_style.css" />
+        <link type="text/css" href="~/Scripts/jquery_custom.css" rel="stylesheet" />
+
+        <!--DatePicker CSS-->
+        <link type="text/css" href="~/Scripts/datepicker/dark-hive/jquery-ui.css" rel="stylesheet" />
+
+
+        <script src="~/Scripts/jquery-2.2.2.js"></script>
+
+        <!--DatePicker JQuery UI-->
+        <script type="text/javascript" src="~/Scripts/datepicker/jquery-ui.js"></script>
+
+        <script src="~/Scripts/main_cntrl.js"></script>
+
+    </head>
+
+    <body id="dd_body"> 
+
+        <!--Header-->
+        <div id="main_header">
+            Organizer
+        </div>
+
+        <div id="main_table">
+            <div style="display:table-row">
+
+                <!--Left Column-->
+                <div id="left_col" style="display:table-cell;">
+                    <div class="org_header">
+                        Bills
+                    </div>
+                    @Html.Raw(BFunc.bill_list_html)
+
+                   <!--New Code 2018-->
+                    @{var query = from it in org_DB.bills
+                                    orderby it.date_due
+                                    select it;
+                    }
+                    @foreach (bill bill in query)
+                    {
+                        <!--<div>@bill.co_name</div>-->
+                       @Html.Raw(BFunc.draw_bill_flags(bill.co_name, (DateTime)bill.date_due, (decimal)bill.amount_due)) 
+                    }
+                    <!--END New Code 2018-->
+
+                    
+                </div>
+                
+                <!--Center Section-->
+                <div id="center_cell" style="display:table-cell;">
+                    <div class="org_header">
+                        Details
+                    </div>
+
+                    <!--Individual Detail Displays-->
+                    @Html.Raw(BFunc.bill_details_html)
+
+                    <h3 id="show_reset" class="im_a_link">Reset</h3>
+                    <div id="pay_element">
+                        
+                                <div>
+                                    New Amount due<br />
+                                <input type="text" id="new_amt_due" />  
+                                </div> 
+
+                                <div class="org_cl">
+                                    New date due<br />
+                                <input type="text" id="new_date_due" class="date_picker" />  
+                                </div> 
+
+                        <div id="reset_bill">Update</div>
+                    </div> 
+
+                   
+                    
+                </div>
+                
+                <!--Right Column-->
+                <div id="right_cell" style="display:table-cell;">
+
+                    <div id="show_total">
+                        <div class="org_header">
+                            Total
+                        </div>
+                        <span id="run_total"></span>
+
+                    </div>
+                   
+                </div>
+
+
+            </div>
+        </div>
+
+     </body>
+
+</html>

@@ -1,0 +1,22 @@
+﻿
+
+{
+  "name": "household",
+  "members": [
+    {
+      "age": "",
+      "rel": ".",
+      "smoke": ""
+    },
+    {
+      "age": "",
+      "rel": ".",
+      "smoke": ""
+    },
+    {
+      "age": "",
+      "rel": "\".",
+      "smoke": ""
+    }
+]
+}
